@@ -56,14 +56,17 @@ The engine solves continuous temporal evolution loops governed by a time-indepen
 
 ### 4.1 Schrödinger Framework
 Stationary measurement operators with a continuously time-evolving state vector or density matrix:
+
 \[\rho(t) = \hat{U}(t)\rho_0\hat{U}^\dagger(t) \quad \text{where} \quad \hat{U}(t) = \exp\left(-\frac{i}{\hbar}\hat{H}t\right)\]
 
 ### 4.2 Heisenberg Framework
 Static reference probe state frozen at time zero, while the parameter encoding operators evolve continuously according to the Heisenberg equation of motion:
+
 \[\hat{G}(t) = \hat{U}^\dagger(t)\hat{G}_0\hat{U}(t)\]
 
 ### 4.3 Automated Formal Verification
 Ensures invariant mathematical representation and physical expectation value equivalence across both formalisms within machine epsilon (\(10^{-15}\)) under pure unitary constraints:
+
 \[\text{Trace}(\rho(t)\hat{G}_0) = \text{Trace}(\rho_0\hat{G}(t))\]
 
 ---
@@ -74,18 +77,22 @@ To simulate physical decoherence profiles (such as thermal drifts, energy relaxa
 
 ### 5.1 The Density Matrix Formalism
 Transitions to the density matrix representation \(\rho\) to support mixed statistical ensembles emerging from environmental coupling:
-\[\rho = \sum_i p_i \vert{}\psi_i\rangle\langle\psi_i\vert{}, \quad 0 \le p_i \le 1, \quad \sum_i p_i = 1.0\]
+
+\[\rho = \sum_i p_i \vert\psi_i\rangle\langle\psi_i\vert, \quad 0 \le p_i \le 1, \quad \sum_i p_i = 1.0\]
 
 ### 5.2 The Kraus Operator Representation
 The continuous non-unitary Lindblad Master Equation is solved across discrete clock cycles via the Kraus Operator Formalism (Quantum Channel Mapping \(\mathcal{E}\)):
+
 \[\rho(t) = \mathcal{E}(\rho_0) = \sum_k E_k(t) \rho_0 E_k^\dagger(t)\]
 
 To satisfy trace preservation and guarantee strict probability conservation, the constructed global Kraus matrices strictly maintain the completeness closure relation at every integration step:
+
 \[\sum_k E_k^\dagger(t) E_k(t) = \mathbf{I}\]
 
 ### 5.3 Generalized Mixed-State QFI Solver
 The framework implements a generalized spectral Lyapunov solver using the Symmetric Logarithmic Derivative (SLD) representation. By ingesting explicit parameter derivative matrices (\(\partial_\theta\rho\)) rather than assuming standard unitary commutators, it accurately evaluates information erosion under environmental dissipation:
-\[F_Q = \text{Trace}(\rho L^2) = \sum_{mn} \frac{2 \vert{}\langle \phi_m \vert{} \frac{\partial \rho}{\partial \theta} \vert{} \phi_n \rangle \vert{}^2}{p_m + p_n}\]
+
+\[F_Q = \text{Trace}(\rho L^2) = \sum_{mn} \frac{2 \vert\langle \phi_m \vert \frac{\partial \rho}{\partial \theta} \vert \phi_n \rangle \vert^2}{p_m + p_n}\]
 
 ---
 

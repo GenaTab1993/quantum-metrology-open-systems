@@ -52,7 +52,7 @@ The neural network's computational architecture maps to quantum mechanics across
 ---
 ## 4. Architectural Implementation of Time-Variant Dynamics
 
-The engine solves continuous temporal evolution loops governed by a time-independent system Hamiltonian Ĥ across two equivalent frameworks:
+The engine solves continuous temporal evolution loops governed by a time-independent system Hamiltonian \(\hat{H}\) across two equivalent frameworks:
 
 ### 4.1 Schrödinger Framework
 Stationary measurement operators with a continuously time-evolving state vector or density matrix:
@@ -63,7 +63,7 @@ Static reference probe state frozen at time zero, while the parameter encoding o
 \[\hat{G}(t) = \hat{U}^\dagger(t)\hat{G}_0\hat{U}(t)\]
 
 ### 4.3 Automated Formal Verification
-Ensures invariant mathematical representation and physical expectation value equivalence across both formalisms within machine epsilon (10⁻¹⁵) under pure unitary constraints:
+Ensures invariant mathematical representation and physical expectation value equivalence across both formalisms within machine epsilon (\(10^{-15}\)) under pure unitary constraints:
 \[\text{Trace}(\rho(t)\hat{G}_0) = \text{Trace}(\rho_0\hat{G}(t))\]
 
 ---
@@ -73,7 +73,7 @@ Ensures invariant mathematical representation and physical expectation value equ
 To simulate physical decoherence profiles (such as thermal drifts, energy relaxation, and leakage currents), the framework integrates Markovian dissipation models.
 
 ### 5.1 The Density Matrix Formalism
-Transitions to the density matrix representation ρ to support mixed statistical ensembles emerging from environmental coupling:
+Transitions to the density matrix representation \(\rho\) to support mixed statistical ensembles emerging from environmental coupling:
 \[\rho = \sum_i p_i \vert{}\psi_i\rangle\langle\psi_i\vert{}, \quad 0 \le p_i \le 1, \quad \sum_i p_i = 1.0\]
 
 ### 5.2 The Kraus Operator Representation

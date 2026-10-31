@@ -20,7 +20,7 @@ rho0 = PLUS @ PLUS.conj().T
 **Mathematically and physically:** The state vector is $`|\psi_0\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)`$. The initial density matrix $`\rho_0 = |\psi_0\rangle\langle\psi_0|`$ is computed as an outer product:
 
 ```math
-\rho_0 = \begin{pmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & \frac{1}{2} \end{pmatrix}
+\rho_0 = \begin{pmatrix} 0.5 & 0.5 \\ 0.5 & 0.5 \end{pmatrix}
 ```
 
 ---

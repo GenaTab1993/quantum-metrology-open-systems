@@ -620,6 +620,8 @@ The engineering ideas in Section 10 are untested. The next step would be to comp
 - [CODE_WALKTHROUGH.md](CODE_WALKTHROUGH.md): a step-by-step explanation of the simulation and how the code is organized.
 - [WORKED_EXAMPLE.md](WORKED_EXAMPLE.md): a hand-calculated single-qubit example that follows the code line by line.
 
+***
+
 **Developer/Physicist:** Genady Tabachnik  
 **Validation Domain:** Post-Silicon Electro-Optical Integration & Open Quantum Systems Simulation  
 

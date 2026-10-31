@@ -58,21 +58,36 @@ The code is organized into separate functional blocks.
 
 ## Step 4: Quantitative Execution, Logs, and Visual Interpretation
 
-Here is an excerpt of the console output from the simulation (the full run prints five time steps for each probe):
+Here is the full console output from the simulation:
 
 ```text
-============================================================================
+====================================================================================
 QUANTUM METROLOGY ENGINE — QFI ANALYSIS
-============================================================================
-State       t         p      Ideal QFI      Noisy QFI
-----------------------------------------------------------------------------
+====================================================================================
+State            t         p      Ideal QFI      Noisy QFI
+------------------------------------------------------------------------------------
 [CHECK] Single-qubit benchmark at p = 0.25
         Numerical QFI : 0.75000000
         Theory (1 - p): 0.75000000
         Residual      : 5.551e-16
-----------------------------------------------------------------------------
-Product     0.600   0.06947        3.000000       2.791593
-GHZ         0.600   0.06947        7.720560       6.852148
+------------------------------------------------------------------------------------
+Product      0.000   0.00000       3.000000       3.000000
+GHZ          0.000   0.00000       9.000000       9.000000
+Product      0.150   0.01784       3.000000       2.946483
+GHZ          0.150   0.01784       8.914014       8.672599
+Product      0.300   0.03536       3.000000       2.893921
+GHZ          0.300   0.03536       8.660985       8.187613
+Product      0.450   0.05257       3.000000       2.842296
+GHZ          0.450   0.05257       8.255417       7.569258
+Product      0.600   0.06947       3.000000       2.791593
+GHZ          0.600   0.06947       7.720560       6.852148
+------------------------------------------------------------------------------------
+CONSISTENCY CHECKS
+Maximum ideal QFI picture residual : 1.066e-14
+Maximum Kraus duality residual      : 2.220e-16
+[OK] Single-qubit analytical benchmark passed.
+[OK] Ideal-picture QFI invariance passed.
+[OK] Kraus-adjoint duality check passed.
 ```
 
 ### Panel 1: Product-State Analysis (Baseline)

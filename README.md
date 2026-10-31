@@ -603,6 +603,7 @@ jupyter notebook quantum-metrology-open-systems.ipynb
 
 Then run all cells. The notebook performs the numerical experiments, executes its consistency checks, prints the QFI results, and saves the visualization as `quantum_metrology_dual_adjoint_analysis.png` in the working directory.
 
+For a step-by-step explanation of the code, see [CODE_WALKTHROUGH.md](CODE_WALKTHROUGH.md).
 ---
 
 ## 13. Conclusion

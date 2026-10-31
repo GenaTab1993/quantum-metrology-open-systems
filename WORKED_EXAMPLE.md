@@ -57,7 +57,7 @@ We subtract them to obtain the commutator $`[G, \rho_0]`$:
 We multiply by $`-i`$ (which is `-1j` in the code):
 
 ```math
-d\_\rho = -i \begin{pmatrix} 0 & 0.5 \\ -0.5 & 0 \end{pmatrix} = \begin{pmatrix} 0 & -0.5i \\ 0.5i & 0 \end{pmatrix}
+\texttt{d\_rho} = -i \begin{pmatrix} 0 & 0.5 \\ -0.5 & 0 \end{pmatrix} = \begin{pmatrix} 0 & -0.5i \\ 0.5i & 0 \end{pmatrix}
 ```
 
 This is the ideal derivative matrix that passes validation in `verify_density_derivative`. Its trace is 0 and it is fully Hermitian.
@@ -95,23 +95,23 @@ We add them to obtain the outgoing noisy state $`\rho_{\text{out}}`$:
 
 Note that the trace of the matrix is $`0.625 + 0.375 = 1.0`$ (probability is conserved, as confirmed by `verify_physical_state`).
 
-For the derivative matrix $`d\_\rho`$: because the Kraus operators do not depend on $`\theta`$, the channel acts linearly and in the same way on the derivative:
+For the derivative matrix $`\texttt{d\_rho}`$: because the Kraus operators do not depend on $`\theta`$, the channel acts linearly and in the same way on the derivative:
 
 ```math
-E_0 (d\_\rho) E_0^\dagger = \begin{pmatrix} 0 & -0.25i\sqrt{3} \\ 0.25i\sqrt{3} & 0 \end{pmatrix}, \qquad E_1 (d\_\rho) E_1^\dagger = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}
+E_0 (\texttt{d\_rho}) E_0^\dagger = \begin{pmatrix} 0 & -0.25i\sqrt{3} \\ 0.25i\sqrt{3} & 0 \end{pmatrix}, \qquad E_1 (\texttt{d\_rho}) E_1^\dagger = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}
 ```
 
-We add them to obtain the outgoing noisy state derivative $`d\_\rho_{\text{out}}`$:
+We add them to obtain the outgoing noisy state derivative $`\texttt{d\_rho}_{\text{out}}`$:
 
 ```math
-d\_\rho_{\text{out}} = \begin{pmatrix} 0 & -0.433i \\ 0.433i & 0 \end{pmatrix}
+\texttt{d\_rho}_{\text{out}} = \begin{pmatrix} 0 & -0.433i \\ 0.433i & 0 \end{pmatrix}
 ```
 
 ---
 
 ## Step 3: Solving the SLD Equation and Extracting the Final QFI
 
-Now the generic engine `compute_generalized_mixed_qfi` takes the noisy inputs we computed: $`\rho_{\text{out}}`$ and $`d\_\rho_{\text{out}}`$.
+Now the generic engine `compute_generalized_mixed_qfi` takes the noisy inputs we computed: $`\rho_{\text{out}}`$ and $`\texttt{d\_rho}_{\text{out}}`$.
 
 **1. Diagonalization (spectral decomposition):** The code extracts the eigenvalues ($`p_i`$) and eigenvectors of $`\rho_{\text{out}}`$ using `np.linalg.eigh`. For our matrix, the eigenvalues are:
 
@@ -119,7 +119,7 @@ Now the generic engine `compute_generalized_mixed_qfi` takes the noisy inputs we
 p_1 = \frac{4 - \sqrt{13}}{8} \approx 0.0493, \qquad p_2 = \frac{4 + \sqrt{13}}{8} \approx 0.9507
 ```
 
-**2. Projecting the derivative onto the eigenbasis** (`d_rho_eigenbasis`): The code changes the basis of the derivative matrix using the eigenvectors ($`V^\dagger\, d\_\rho_{\text{out}}\, V`$). The resulting matrix has zero diagonal entries, and its off-diagonal entries have magnitude $`\frac{\sqrt{3}}{4} \approx 0.433`$, so $`|d_{12}|^2 = \frac{3}{16} = 0.1875`$.
+**2. Projecting the derivative onto the eigenbasis** (`d_rho_eigenbasis`): The code changes the basis of the derivative matrix using the eigenvectors ($`V^\dagger\, \texttt{d\_rho}_{\text{out}}\, V`$). The resulting matrix has zero diagonal entries, and its off-diagonal entries have magnitude $`\frac{\sqrt{3}}{4} \approx 0.433`$, so $`|d_{12}|^2 = \frac{3}{16} = 0.1875`$.
 
 **3. The spectral summation loop of the SLD:** The code runs over all index pairs. Only the two off-diagonal terms are nonzero, and for both the denominator is $`p_1 + p_2 = 1.0`$:
 

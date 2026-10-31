@@ -603,7 +603,6 @@ jupyter notebook quantum-metrology-open-systems.ipynb
 
 Then run all cells. The notebook performs the numerical experiments, executes its consistency checks, prints the QFI results, and saves the visualization as `quantum_metrology_dual_adjoint_analysis.png` in the working directory.
 
-For a step-by-step explanation of the code, see [CODE_WALKTHROUGH.md](CODE_WALKTHROUGH.md).
 ---
 
 ## 13. Conclusion
@@ -615,6 +614,11 @@ The mathematical appendix separates a set-theoretic fact, the equal cardinality 
 The engineering ideas in Section 10 are untested. The next step would be to compare a baseline and a sensitivity-aware implementation on measurable metrics.
 
 ***
+
+## Additional Documentation
+
+- [CODE_WALKTHROUGH.md](CODE_WALKTHROUGH.md): a step-by-step explanation of the simulation and how the code is organized.
+- [WORKED_EXAMPLE.md](WORKED_EXAMPLE.md): a hand-calculated single-qubit example that follows the code line by line.
 
 **Developer/Physicist:** Genady Tabachnik  
 **Validation Domain:** Post-Silicon Electro-Optical Integration & Open Quantum Systems Simulation  

@@ -293,7 +293,7 @@ The simulation compares Product and GHZ probe states in a three-qubit system und
 
 The figure below was generated directly by the simulation code. It contains four panels: ideal and noisy QFI for the Product probe (panel 1) and for the GHZ probe (panel 2), the ideal-picture QFI invariance residual (panel 3), and the Kraus-adjoint expectation residual (panel 4).
 
-![Quantum Metrology Dual-Adjoint Analysis](quantum_metrology_dual_adjoint_analysis.png)
+![quantum_metrology_dual_adjoint_analysis.png](quantum_metrology_dual_adjoint_analysis.png)
 
 *Figure 1. Output of the simulation: `quantum_metrology_dual_adjoint_analysis.png`.*
 

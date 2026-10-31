@@ -295,7 +295,7 @@ The figure below was generated directly by the simulation code. It contains four
 
 ![quantum_metrology_dual_adjoint_analysis.png](quantum_metrology_dual_adjoint_analysis.png)
 
-*Figure 1. Output of the simulation: `quantum_metrology_dual_adjoint_analysis.png`.*
+*Figure 1. Output of the simulation: `quantum_metrology_dual_adjoint_analysis`.*
 
 Notes on reading the figure:
 

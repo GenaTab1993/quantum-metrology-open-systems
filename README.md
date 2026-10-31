@@ -531,8 +531,8 @@ The protocol is intended to document the logical scope of the project's verifica
 
 ### Documentation and Verification Tools
 
-- **[Logical Consistency Protocol](logical_consistency/LOGICAL_CONSISTENCY_PROTOCOL.md)** — describes the mathematical assumptions, verification categories, interpretation of reported results, and limitations.
-- **[Exact Consistency Checks](logical_consistency/logical_consistency_checks.py)** — a SymPy script for selected finite-dimensional examples involving density matrices, amplitude-damping Kraus operators, channel duality, and the single-qubit SLD/QFI benchmark.
+- **[Logical Consistency Protocol](LOGICAL_CONSISTENCY_PROTOCOL.md)** — describes the mathematical assumptions, verification categories, interpretation of reported results, and limitations.
+- **[Exact Consistency Checks](logical_consistency_checks.py)** — a SymPy script for selected finite-dimensional examples involving density matrices, amplitude-damping Kraus operators, channel duality, and the single-qubit SLD/QFI benchmark.
 
 ### Run the Checks
 

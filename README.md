@@ -20,7 +20,7 @@ It investigates:
 - Kraus operators and their adjoint maps.
 - Analytical and numerical verification.
 - Mathematical relationships between classical and quantum state spaces using Cantor's theorem.
-- Potential connections to computational architecture and Processing Element (PE) optimization.
+- Possible connections to Processing Element (PE) design, discussed as an open direction in Section 10.
 
 The project is intended as a numerical research framework that can be extended toward more complex quantum systems and sensitivity-aware computational models.
 
@@ -295,14 +295,14 @@ The figure below was generated directly by the simulation code. It contains four
 
 ![quantum_metrology_dual_adjoint_analysis.png](quantum_metrology_dual_adjoint_analysis.png)
 
-*Figure 1. Output of the simulation: `quantum_metrology_dual_adjoint_analysis`.*
+*Figure 1. Output of the simulation: `quantum_metrology_dual_adjoint_analysis.png`.*
 
 Notes on reading the figure:
 
 - The horizontal axis is the time-step index, not time itself. Indices 0–4 correspond to t = 0.00, 0.15, 0.30, 0.45, and 0.60.
 - In panels 3 and 4 the plotted values are floored at 10<sup>−16</sup> for the logarithmic axis. A point drawn at 10<sup>−16</sup> therefore means a residual of 10<sup>−16</sup> or smaller, including exactly zero.
 
-### 7.4 Analysis of the Raw Data
+### 7.4 Analysis of the Results
 
 **1. Product-state ideal QFI remains constant.**
 
@@ -324,7 +324,7 @@ These comparisons isolate the difference between ideal and noisy QFI at each sam
 
 At time 0.6, the noisy GHZ QFI is 6.852148, compared with 2.791593 for the Product probe. The GHZ value is approximately 2.45 times the Product value under the same simulated conditions.
 
-This is evidence of a sensitivity advantage for the GHZ probe in this particular configuration, not proof that GHZ states always outperform Product states under arbitrary noise, Hamiltonians, or measurement constraints.
+This is a result for this configuration only.
 
 ### 7.5 Interpretation and Scope
 
@@ -334,9 +334,7 @@ The numerical results distinguish three effects:
 - **Environmental noise:** reduces QFI for both probe states.
 - **Probe-state choice:** the GHZ probe retains higher QFI than the Product probe throughout the sampled time range.
 
-The results support a configuration-specific comparison of quantum parameter sensitivity. They do not by themselves establish a universal quantum advantage, an optimal probe state, or improved industrial processing performance.
-
-The conclusions are limited to the selected three-qubit model, Hamiltonian, encoding generator, amplitude-damping channel, and sampled times.
+These conclusions apply only to the three-qubit model, Hamiltonian, encoding generator, damping channel, and sampled times used here.
 
 
 ## 8. Analytical Benchmark and Numerical Validation
@@ -401,7 +399,7 @@ The duality verification passed.
 | Ideal QFI representation invariance | $`1.066\times10^{-14}`$ | PASS |
 | Kraus-adjoint duality | $`2.220\times10^{-16}`$ | PASS |
 
-These checks provide numerical evidence that the tested calculations are internally consistent. They do not constitute a formal proof of correctness for every possible system size, state, or noise model.
+These checks show that the implementation is internally consistent for the cases tested. They are not a proof for other system sizes, states, or noise models.
 
 ---
 
@@ -519,102 +517,28 @@ However, Cantor's theorem does not establish that the finite-$`N`$ quantum pure-
 
 ### 9.5 Interpretation and Scope
 
-The cardinality equality is a mathematical statement about the number of elements in two sets.
+The equality says only that the two sets have the same number of elements. It does not make classical bit sequences and quantum states equivalent in structure: pure states are vectors of complex amplitudes, they support superposition and entanglement, measurement outcomes follow the Born rule, and parameter sensitivity can be quantified with the QFI.
 
-It does not imply that classical binary configurations and quantum states are physically or operationally equivalent.
-
-Their structures differ substantially:
-
-- Classical binary configurations are sequences of discrete values.
-- Quantum pure states are represented by complex amplitudes.
-- Quantum systems support superposition and entanglement.
-- Quantum measurement probabilities follow the Born rule.
-- Quantum parameter sensitivity can be quantified using QFI.
-
-Consequently, cardinality alone cannot establish computational superiority, quantum speedup, or greater physical information capacity.
-
-The relevance of this comparison is conceptual: it separates the mathematical size of a state space from its internal structure and the operations that can be performed within it.
+Cardinality alone says nothing about computational power or information capacity. Its use here is conceptual: it separates the size of a state space from its structure and from the operations that can be performed on it.
 
 ---
 
-## 10. Engineering Implications and Potential Industrial Applications
+## 10. Possible Applications (Not Tested Here)
 
-The numerical results provide a foundation for exploring how concepts from quantum metrology, parameter sensitivity, and noise analysis may contribute to advanced computational systems.
+The simulation does not measure anything about hardware. The ideas below are research directions suggested by the QFI and noise analysis. None of them has been tested in this project.
 
-The applications discussed below are potential research directions. They have not yet been demonstrated as hardware performance improvements by the current simulation.
+### 10.1 Sensitivity-Aware Precision in Processing Elements
 
-### 10.1 Processing Element (PE) Optimization
+A Processing Element (PE) is the basic compute unit of a processor or accelerator. The idea is to estimate how strongly the final output depends on small errors in each operation, then spend more precision or resources on the sensitive operations and less on the rest. The open question is whether this improves PE efficiency (energy, latency, throughput) at acceptable accuracy.
 
-A particularly interesting direction is the investigation of sensitivity-aware optimization for Processing Elements (PEs).
+### 10.2 Other Directions
 
-A Processing Element is a fundamental computational unit used in processors, accelerators, and parallel computing architectures.
+- **Quantum devices:** probe-state choice, noise characterization, and calibration, using more noise channels and larger systems than studied here.
+- **Deep learning:** sensitivity analysis of network parameters and adaptive numerical precision. The link is one of method only; it does not mean that neural networks work through quantum processes.
 
-Its efficiency depends on several factors:
+### 10.3 How It Could Be Tested
 
-- Computational accuracy.
-- Latency.
-- Throughput.
-- Energy consumption.
-- Hardware utilization.
-- Memory and processing overhead.
-
-The project's focus on parameter sensitivity and noise propagation suggests several possible approaches.
-
-**Sensitivity-aware resource allocation**
-
-Identify parameters and operations whose errors have the greatest influence on the final computational output.
-
-Higher precision or additional resources could then be allocated selectively rather than uniformly across all processing operations.
-
-**Noise and error analysis**
-
-Use mathematical models to investigate how perturbations propagate through computational stages and identify particularly sensitive operations.
-
-**Adaptive precision**
-
-Explore whether computational precision can be adjusted dynamically according to the sensitivity requirements of a given operation.
-
-**Accuracy-efficiency optimization**
-
-Investigate trade-offs between numerical precision, execution time, and energy consumption.
-
-The central research question is whether sensitivity-based resource allocation can improve PE efficiency while maintaining acceptable computational accuracy.
-
-### 10.2 Quantum Processing Units (QPUs)
-
-The project's QFI framework is directly relevant to quantum information processing.
-
-Potential applications include:
-
-- Quantum-state sensitivity analysis.
-- Noise characterization and decoherence studies.
-- Probe-state optimization.
-- Quantum measurement strategies.
-- Calibration and control of quantum systems.
-
-Future versions could investigate additional noise channels, larger quantum systems, and alternative probe states.
-
-### 10.3 Deep Learning and Hybrid Computational Architectures
-
-The mathematical ideas explored in this project may also inspire research into classical Deep Learning and hybrid computational architectures.
-
-Possible directions include:
-
-- Sensitivity analysis of neural-network parameters.
-- Identification of operations vulnerable to numerical errors.
-- Adaptive computational precision.
-- Resource allocation based on output sensitivity.
-- Comparison of alternative mathematical representations.
-
-The connection is methodological and mathematical. It does not imply that classical neural networks operate through quantum-mechanical processes.
-
-### 10.4 Proposed Engineering Evaluation
-
-The current implementation does not directly measure PE performance, power consumption, or hardware utilization.
-
-To validate the proposed applications, future research should compare a baseline implementation against a sensitivity-aware implementation.
-
-Suggested evaluation metrics:
+The current code does not measure PE performance, power consumption, or hardware utilization. A test would compare a baseline implementation with a sensitivity-aware one on the following metrics:
 
 | Metric | Evaluation Objective |
 |---|---|
@@ -625,13 +549,7 @@ Suggested evaluation metrics:
 | Hardware Utilization | Processing and memory resource usage |
 | Area and Complexity | Hardware cost and implementation overhead |
 
-An engineering improvement should be claimed only when measurable gains are demonstrated against a well-defined baseline.
-
-### 10.5 Research Outlook
-
-The broader objective is to investigate whether mathematical tools developed in quantum information theory can inspire new approaches to computational sensitivity analysis, noise resilience, and resource optimization.
-
-The current engine establishes a numerically validated quantum-metrology simulation. Its potential industrial relevance lies in providing a mathematical starting point for further research into sensitivity-aware computation and adaptive processing architectures.
+An improvement should be claimed only if measured gains over a well-defined baseline are shown.
 
 ---
 
@@ -642,13 +560,12 @@ The current implementation has several limitations.
 - The simulation uses a relatively small three-qubit system for its main comparison.
 - Only independent amplitude-damping noise is considered.
 - The numerical results depend on the selected Hamiltonian, encoding generator, and probe states.
-- The implementation does not establish a universal advantage for entangled states.
 - The ideal Schrödinger-Heisenberg invariance check is not a proof of noisy-picture equivalence.
-- The Cantor-theorem result concerns set cardinality and does not establish computational advantage.
+- The Cantor-theorem result concerns set cardinality only; it says nothing about computational advantage.
 - The global Kraus representation generates $`2^N`$ operators for $`N`$ independently damped qubits, and each operator is a $`2^N \times 2^N`$ matrix. This exponential growth in both the number and the size of the operators limits scalability as the system size increases.
-- Industrial applications, including PE optimization, remain proposed directions and have not been experimentally validated.
+- The applications in Section 10, including PE optimization, are untested.
 
-Potential future extensions include:
+Possible future extensions:
 
 1. Additional noise channels, including dephasing and depolarizing noise.
 2. Larger quantum systems.
@@ -688,21 +605,13 @@ Then run all cells. The notebook performs the numerical experiments, executes it
 
 ---
 
-## 13. Final Conclusion
+## 13. Conclusion
 
-The Quantum Metrology Engine combines quantum-state modeling, numerical QFI evaluation, open-system dynamics, and mathematical consistency checks in a single research-oriented implementation.
+The project computes the QFI of three-qubit Product and GHZ probes under unitary evolution and amplitude damping, and checks the implementation in three ways: a single-qubit analytic result, agreement between the Schrödinger and Heisenberg pictures for ideal evolution, and Kraus-adjoint duality. In this configuration the GHZ probe keeps a higher QFI than the Product probe at every sampled time, with and without noise.
 
-The simulation demonstrates the influence of unitary evolution and amplitude damping on quantum parameter sensitivity, while comparing Product and GHZ probe states under a specific three-qubit configuration.
+The mathematical appendix separates a set-theoretic fact, the equal cardinality of infinite binary sequences and finite-N qubit pure-state spaces, from any claim about computational power.
 
-Its independent numerical checks support the consistency of the tested implementation.
-
-The mathematical appendix establishes an equality of cardinalities between infinite classical binary configurations and finite-$`N`$ quantum pure-state spaces, while using Cantor's theorem to demonstrate the strict growth of the power-set hierarchy. This distinction emphasizes that mathematical cardinality and physical or computational capability are different concepts.
-
-Beyond quantum metrology, the project opens potential research directions in sensitivity-aware computation, noise analysis, adaptive precision, and Processing Element optimization.
-
-The next step is to translate these mathematical ideas into independently testable engineering experiments, with measurable improvements in accuracy, latency, throughput, energy efficiency, and hardware utilization.
-
-**The central research objective is to explore how rigorous mathematical models of sensitivity and noise can contribute to the design of more efficient and reliable computational systems.**
+The engineering ideas in Section 10 are untested. The next step would be to compare a baseline and a sensitivity-aware implementation on measurable metrics.
 
 ***
 

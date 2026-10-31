@@ -8,20 +8,20 @@ A hand calculation of the single-qubit check that the code runs ($`N = 1`$, $`p 
 
 We feed the code a single qubit ($`N = 1`$) in the plus state.
 
-- **In the code:**
+**In the code:**
 
-  ```python
-  ZERO = np.array([[1], [0]], dtype=complex)
-  ONE = np.array([[0], [1]], dtype=complex)
-  PLUS = (ZERO + ONE) / np.sqrt(2) # [1/sqrt(2), 1/sqrt(2)]
-  rho0 = PLUS @ PLUS.conj().T
-  ```
+```python
+ZERO = np.array([[1], [0]], dtype=complex)
+ONE = np.array([[0], [1]], dtype=complex)
+PLUS = (ZERO + ONE) / np.sqrt(2) # [1/sqrt(2), 1/sqrt(2)]
+rho0 = PLUS @ PLUS.conj().T
+```
 
-- **Mathematically and physically:** The state vector is $`|\psi_0\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)`$. The initial density matrix $`\rho_0 = |\psi_0\rangle\langle\psi_0|`$ is computed as an outer product:
+**Mathematically and physically:** The state vector is $`|\psi_0\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)`$. The initial density matrix $`\rho_0 = |\psi_0\rangle\langle\psi_0|`$ is computed as an outer product:
 
-  ```math
-  \rho_0 = \begin{pmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & \frac{1}{2} \end{pmatrix}
-  ```
+```math
+\rho_0 = \begin{pmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & \frac{1}{2} \end{pmatrix}
+```
 
 ---
 
@@ -29,38 +29,38 @@ We feed the code a single qubit ($`N = 1`$) in the plus state.
 
 In the analytical single-qubit check, the initial state directly undergoes unitary phase encoding under the rotation generator $`G = \frac{1}{2}Z`$. We want to compute the rate of change of the state with respect to the angle parameter $`\theta`$ (the partial derivative $`\partial_\theta \rho`$) at the point $`\theta = 0`$.
 
-- **In the code:**
+**In the code:**
 
-  ```python
-  generator = 0.5 * Z  # Z = [[1, 0], [0, -1]]
-  d_rho = -1j * (generator @ rho0 - rho0 @ generator)
-  ```
+```python
+generator = 0.5 * Z  # Z = [[1, 0], [0, -1]]
+d_rho = -1j * (generator @ rho0 - rho0 @ generator)
+```
 
-- **The physical and mathematical computation (the commutator):**
+**The physical and mathematical computation (the commutator):**
 
-  ```math
-  G = \begin{pmatrix} 0.5 & 0 \\ 0 & -0.5 \end{pmatrix}
-  ```
+```math
+G = \begin{pmatrix} 0.5 & 0 \\ 0 & -0.5 \end{pmatrix}
+```
 
-  Let us compute the products:
+Let us compute the products:
 
-  ```math
-  G\rho_0 = \begin{pmatrix} 0.25 & 0.25 \\ -0.25 & -0.25 \end{pmatrix}, \qquad \rho_0 G = \begin{pmatrix} 0.25 & -0.25 \\ 0.25 & -0.25 \end{pmatrix}
-  ```
+```math
+G\rho_0 = \begin{pmatrix} 0.25 & 0.25 \\ -0.25 & -0.25 \end{pmatrix}, \qquad \rho_0 G = \begin{pmatrix} 0.25 & -0.25 \\ 0.25 & -0.25 \end{pmatrix}
+```
 
-  We subtract them to obtain the commutator $`[G, \rho_0]`$:
+We subtract them to obtain the commutator $`[G, \rho_0]`$:
 
-  ```math
-  [G, \rho_0] = G\rho_0 - \rho_0 G = \begin{pmatrix} 0 & 0.5 \\ -0.5 & 0 \end{pmatrix}
-  ```
+```math
+[G, \rho_0] = G\rho_0 - \rho_0 G = \begin{pmatrix} 0 & 0.5 \\ -0.5 & 0 \end{pmatrix}
+```
 
-  We multiply by $`-i`$ (which is `-1j` in the code):
+We multiply by $`-i`$ (which is `-1j` in the code):
 
-  ```math
-  d\_\rho = -i \begin{pmatrix} 0 & 0.5 \\ -0.5 & 0 \end{pmatrix} = \begin{pmatrix} 0 & -0.5i \\ 0.5i & 0 \end{pmatrix}
-  ```
+```math
+d\_\rho = -i \begin{pmatrix} 0 & 0.5 \\ -0.5 & 0 \end{pmatrix} = \begin{pmatrix} 0 & -0.5i \\ 0.5i & 0 \end{pmatrix}
+```
 
-  This is the ideal derivative matrix that passes validation in `verify_density_derivative`. Its trace is 0 and it is fully Hermitian.
+This is the ideal derivative matrix that passes validation in `verify_density_derivative`. Its trace is 0 and it is fully Hermitian.
 
 ---
 
@@ -72,40 +72,40 @@ Now we inject the noise. Assume a fixed damping probability $`p = 0.25`$ (as in 
 E_0 = \begin{pmatrix} 1 & 0 \\ 0 & \sqrt{1-0.25} \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & \frac{\sqrt{3}}{2} \end{pmatrix}, \qquad E_1 = \begin{pmatrix} 0 & \sqrt{0.25} \\ 0 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 0.5 \\ 0 & 0 \end{pmatrix}
 ```
 
-- **In the code:**
+**In the code:**
 
-  ```python
-  rho_out = apply_kraus_channel(rho0, kraus_ops)
-  d_rho_out = apply_kraus_channel(d_rho, kraus_ops)
-  ```
+```python
+rho_out = apply_kraus_channel(rho0, kraus_ops)
+d_rho_out = apply_kraus_channel(d_rho, kraus_ops)
+```
 
-- **The matrix computations of the channel** $`\sum_k E_k \rho E_k^\dagger`$:
+**The matrix computations of the channel** $`\sum_k E_k \rho E_k^\dagger`$:
 
-  For the state $`\rho_0`$:
+For the state $`\rho_0`$:
 
-  ```math
-  E_0 \rho_0 E_0^\dagger = \begin{pmatrix} 0.5 & 0.25\sqrt{3} \\ 0.25\sqrt{3} & 0.375 \end{pmatrix}, \qquad E_1 \rho_0 E_1^\dagger = \begin{pmatrix} 0.125 & 0 \\ 0 & 0 \end{pmatrix}
-  ```
+```math
+E_0 \rho_0 E_0^\dagger = \begin{pmatrix} 0.5 & 0.25\sqrt{3} \\ 0.25\sqrt{3} & 0.375 \end{pmatrix}, \qquad E_1 \rho_0 E_1^\dagger = \begin{pmatrix} 0.125 & 0 \\ 0 & 0 \end{pmatrix}
+```
 
-  We add them to obtain the outgoing noisy state $`\rho_{\text{out}}`$:
+We add them to obtain the outgoing noisy state $`\rho_{\text{out}}`$:
 
-  ```math
-  \rho_{\text{out}} = \begin{pmatrix} 0.5 + 0.125 & 0.25\sqrt{3} \\ 0.25\sqrt{3} & 0.375 \end{pmatrix} = \begin{pmatrix} 0.625 & 0.433 \\ 0.433 & 0.375 \end{pmatrix}
-  ```
+```math
+\rho_{\text{out}} = \begin{pmatrix} 0.5 + 0.125 & 0.25\sqrt{3} \\ 0.25\sqrt{3} & 0.375 \end{pmatrix} = \begin{pmatrix} 0.625 & 0.433 \\ 0.433 & 0.375 \end{pmatrix}
+```
 
-  Note that the trace of the matrix is $`0.625 + 0.375 = 1.0`$ (probability is conserved, as confirmed by `verify_physical_state`).
+Note that the trace of the matrix is $`0.625 + 0.375 = 1.0`$ (probability is conserved, as confirmed by `verify_physical_state`).
 
-  For the derivative matrix $`d\_\rho`$: because the Kraus operators do not depend on $`\theta`$, the channel acts linearly and in the same way on the derivative:
+For the derivative matrix $`d\_\rho`$: because the Kraus operators do not depend on $`\theta`$, the channel acts linearly and in the same way on the derivative:
 
-  ```math
-  E_0 (d\_\rho) E_0^\dagger = \begin{pmatrix} 0 & -0.25i\sqrt{3} \\ 0.25i\sqrt{3} & 0 \end{pmatrix}, \qquad E_1 (d\_\rho) E_1^\dagger = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}
-  ```
+```math
+E_0 (d\_\rho) E_0^\dagger = \begin{pmatrix} 0 & -0.25i\sqrt{3} \\ 0.25i\sqrt{3} & 0 \end{pmatrix}, \qquad E_1 (d\_\rho) E_1^\dagger = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}
+```
 
-  We add them to obtain the outgoing noisy state derivative $`d\_\rho_{\text{out}}`$:
+We add them to obtain the outgoing noisy state derivative $`d\_\rho_{\text{out}}`$:
 
-  ```math
-  d\_\rho_{\text{out}} = \begin{pmatrix} 0 & -0.433i \\ 0.433i & 0 \end{pmatrix}
-  ```
+```math
+d\_\rho_{\text{out}} = \begin{pmatrix} 0 & -0.433i \\ 0.433i & 0 \end{pmatrix}
+```
 
 ---
 
@@ -113,19 +113,19 @@ E_0 = \begin{pmatrix} 1 & 0 \\ 0 & \sqrt{1-0.25} \end{pmatrix} = \begin{pmatrix}
 
 Now the generic engine `compute_generalized_mixed_qfi` takes the noisy inputs we computed: $`\rho_{\text{out}}`$ and $`d\_\rho_{\text{out}}`$.
 
-1. **Diagonalization (spectral decomposition):** The code extracts the eigenvalues ($`p_i`$) and eigenvectors of $`\rho_{\text{out}}`$ using `np.linalg.eigh`. For our matrix, the eigenvalues are:
+**1. Diagonalization (spectral decomposition):** The code extracts the eigenvalues ($`p_i`$) and eigenvectors of $`\rho_{\text{out}}`$ using `np.linalg.eigh`. For our matrix, the eigenvalues are:
 
-   ```math
-   p_1 = \frac{4 - \sqrt{13}}{8} \approx 0.0493, \qquad p_2 = \frac{4 + \sqrt{13}}{8} \approx 0.9507
-   ```
+```math
+p_1 = \frac{4 - \sqrt{13}}{8} \approx 0.0493, \qquad p_2 = \frac{4 + \sqrt{13}}{8} \approx 0.9507
+```
 
-2. **Projecting the derivative onto the eigenbasis** (`d_rho_eigenbasis`): The code changes the basis of the derivative matrix using the eigenvectors ($`V^\dagger\, d\_\rho_{\text{out}}\, V`$). The resulting matrix has zero diagonal entries, and its off-diagonal entries have magnitude $`\frac{\sqrt{3}}{4} \approx 0.433`$, so $`|d_{12}|^2 = \frac{3}{16} = 0.1875`$.
+**2. Projecting the derivative onto the eigenbasis** (`d_rho_eigenbasis`): The code changes the basis of the derivative matrix using the eigenvectors ($`V^\dagger\, d\_\rho_{\text{out}}\, V`$). The resulting matrix has zero diagonal entries, and its off-diagonal entries have magnitude $`\frac{\sqrt{3}}{4} \approx 0.433`$, so $`|d_{12}|^2 = \frac{3}{16} = 0.1875`$.
 
-3. **The spectral summation loop of the SLD:** The code runs over all index pairs. Only the two off-diagonal terms are nonzero, and for both the denominator is $`p_1 + p_2 = 1.0`$:
+**3. The spectral summation loop of the SLD:** The code runs over all index pairs. Only the two off-diagonal terms are nonzero, and for both the denominator is $`p_1 + p_2 = 1.0`$:
 
-   ```math
-   F_Q = \frac{2|d_{12}|^2}{p_1 + p_2} + \frac{2|d_{21}|^2}{p_2 + p_1} = 2 \times 0.1875 + 2 \times 0.1875 = 0.75000000
-   ```
+```math
+F_Q = \frac{2|d_{12}|^2}{p_1 + p_2} + \frac{2|d_{21}|^2}{p_2 + p_1} = 2 \times 0.1875 + 2 \times 0.1875 = 0.75000000
+```
 
 ---
 

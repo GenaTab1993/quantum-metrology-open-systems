@@ -523,6 +523,32 @@ Cardinality alone says nothing about computational power or information capacity
 
 ---
 
+## Logical Consistency Protocol
+
+The project includes a supplementary protocol for distinguishing exact mathematical identities, finite symbolic checks, floating-point numerical validation, and claims that remain unproven.
+
+The protocol is intended to document the logical scope of the project's verification procedures. It does not replace the numerical experiments or establish the correctness of every part of the simulation.
+
+### Documentation and Verification Tools
+
+- **[Logical Consistency Protocol](logical_consistency/LOGICAL_CONSISTENCY_PROTOCOL.md)** — describes the mathematical assumptions, verification categories, interpretation of reported results, and limitations.
+- **[Exact Consistency Checks](logical_consistency/logical_consistency_checks.py)** — a SymPy script for selected finite-dimensional examples involving density matrices, amplitude-damping Kraus operators, channel duality, and the single-qubit SLD/QFI benchmark.
+
+### Run the Checks
+
+```bash
+python -m pip install sympy
+python logical_consistency/logical_consistency_checks.py
+```
+
+### Scope and Limitations
+
+The symbolic checks cover selected examples for finite systems with \(N=1,2\). They do not prove claims for arbitrary system sizes, all evolution times, or all noise models. They also do not independently reproduce the full simulation notebook.
+
+The protocol distinguishes exact symbolic verification from floating-point numerical results and from physical or engineering hypotheses that have not been tested.
+
+These tools supplement the project's existing validation procedures; they should not be interpreted as a general proof of the simulation's correctness.
+
 ## 10. Possible Applications (Not Tested Here)
 
 The simulation does not measure anything about hardware. The ideas below are research directions suggested by the QFI and noise analysis. None of them has been tested in this project.
